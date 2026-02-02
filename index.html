@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serine • Mon Obsession 💖🔥</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --apple-pink: #ff2d55;
+            --apple-red: #ff3b30;
+            --bg-light: #fbfbfd;
+            --bg-dark: #121212;
+            --text-light: #1d1d1f;
+            --text-dark: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body {
+            height: 100vh; width: 100vw;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--bg-light);
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-light);
+            overflow: hidden;
+            transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.mood-spicy {
+            background: radial-gradient(circle at center, #2c0211 0%, #000000 100%);
+            color: var(--text-dark);
+        }
+
+        .main-card { text-align: center; padding: 2rem; width: 95%; max-width: 550px; z-index: 10; }
+
+        h1 {
+            font-weight: 600; font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.2em; text-transform: uppercase;
+            margin-bottom: 2rem; opacity: 0.6;
+        }
+
+        .compliment-box {
+            min-height: 250px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        #compliment-text {
+            font-size: clamp(1.5rem, 6.5vw, 2.6rem);
+            font-weight: 500; line-height: 1.2;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        #compliment-text.show { opacity: 1; transform: translateY(0) scale(1); }
+
+        .magic-button {
+            background-color: var(--apple-pink);
+            color: white; border: none;
+            padding: 22px 50px; font-size: 1.1rem; font-weight: 600;
+            border-radius: 50px; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
+            transition: all 0.4s ease;
+            user-select: none; -webkit-tap-highlight-color: transparent;
+        }
+
+        .magic-button:active { transform: scale(0.9); }
+        .mood-spicy .magic-button { background-color: #ff3b30; box-shadow: 0 10px 40px rgba(255, 59, 48, 0.5); }
+
+        .particle { position: absolute; pointer-events: none; z-index: 5; }
+    </style>
+</head>
+<body>
+
+    <div class="main-card">
+        <h1 id="sub-title">Pour Serine, mon secret ✨</h1>
+        <div class="compliment-box">
+            <p id="compliment-text">Prête pour ce que j'ai à te dire ? 😏</p>
+        </div>
+        <button class="magic-button" id="btn">Dis-moi tout 💖</button>
+    </div>
+
+    <script>
+        const sweetLines = [
+            "Serine, tu es la femme de ma vie. 💍",
+            "Ton sourire est mon seul remède. ✨",
+            "J'aime ton âme autant que ton visage. 🥹",
+            "Wallah je t'aime serine. 🌊",
+            "Je suis tellement fier de t'avoir. 🥇",
+            "Tu es plus belle que n'importe quel rêve. ☁️",
+            "Merci d'illuminer mon existence, Serine. 🌸",
+            "Mon futur n'existe qu'avec toi. ♾️",
+            "Ta douceur me désarme totalement. 🧸",
+            "Tu es ma perle rare, mon trésor. 💎",
+            "Serine, tu es mon univers tout entier. 🌌",
+            "Je t'aime un peu plus à chaque souffle. ⏳",
+            "Tu es l'unique raison de mon bonheur. ❤️",
+            "Ton intelligence me fascine chaque jour. 🧠",
+            "À tes côtés, je me sens invincible. 💪",
+            "Tu es faite de poussière d'étoiles. ✨",
+            "Chaque seconde avec toi est sacrée. 🎁",
+            "Tu es mon équilibre parfait. ⚖️",
+            "Ton rire est ma mélodie favorite. 🎶",
+            "Tu es la plus belle évidence de ma vie. 🍀",
+            "Ta bienveillance me rend meilleur. 📈",
+            "Je pourrais te regarder dormir des heures. 🌙",
+            "Tu es mon petit paradis sur terre. 🏝️",
+            "Rien qu'en pensant à toi, mon cœur bat. 💓",
+            "Tu es irremplaçable, Serine. 🚫🔄"
+        ];
+
+        const explicitLines = [
+            "J'ai envie de te sentir contre moi, nue... 🥵",
+            "Ta petite chatte je te la bousille 🤤",
+            "Je veux te dévorer la chatte. 🍓",
+            "T'as des grosses fesses salope laisse moi les serrer. 🍑🔥",
+            "J'aime quand tu es soumise à ma grosse bite. 🫦",
+            "J'ai tellement faim de toi, Serine. 🫦🔥",
+            "Je veux t'entendre crier mon nom ce soir. 😈",
+            "Tes courbes sont une torture tellement t'es bonne. ⏳",
+            "J'ai envie de te prendre en levrette là, tout de suite. 🔞",
+            "T'es tellement sexy quand tu gémis... 😏",
+            "Tes lèvres sont mon addiction la plus charnelle. 👄",
+            "Je ne pense qu'à la sensation de moi en toi. 🥵",
+            "T'es ma petite salope préférée quand on est seuls. 😈🫦",
+            "J'ai envie de te faire de te bz. 🔥",
+            "Ton regard quand tu as envie de moi me rend sauvage. 🐆",
+            "Je veux explorer chaque recoin de ton corps délicieux. 👅",
+            "T'es la plus belle, mais t'es surtout la plus grosse chienne pour moi. 🔥",
+            "J'ai envie de te dominer et de te faire perdre la tête. ⛓️",
+            "Ton corps est une œuvre d'art que je veux goûter. 🎨🫦",
+            "T'as une cambrure qui me rend totalement dingue. 🥵⏳",
+            "Je veux sentir tes ongles dans mon dos. 💅🔥",
+            "T'es mon fantasme sexuel numéro 1, Serine. 💭🔞",
+            "J'ai envie de passer la nuit entre tes jambes. 👅💦",
+            "Tes seins, tes fesses... tout en toi m'obsède. 😍🔥",
+            "On va passer une nuit inoubliable, prépare-toi. 🛌😈"
+        ];
+
+        const btn = document.getElementById('btn');
+        const text = document.getElementById('compliment-text');
+        const body = document.body;
+        
+        function createParticle(x, y, isSpicy) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const icons = isSpicy ? ['🔥', '🫦', '👅', '🔞', '💦'] : ['❤️', '✨', '🌸', '💖'];
+            p.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            p.style.left = x + 'px';
+            p.style.top = y + 'px';
+            p.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(p);
+            
+            const destX = (Math.random() - 0.5) * 300;
+            const destY = -(Math.random() * 300 + 100);
+            
+            p.animate([
+                { opacity: 1, transform: 'translate(0,0) scale(1)' },
+                { opacity: 0, transform: `translate(${destX}px, ${destY}px) scale(0.5) rotate(360deg)` }
+            ], { duration: 1500, easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)' }).onfinish = () => p.remove();
+        }
+
+        btn.addEventListener('click', () => {
+            text.classList.remove('show');
+            
+            setTimeout(() => {
+                const isSpicy = Math.random() > 0.5;
+                let compliment;
+                
+                if (isSpicy) {
+                    compliment = explicitLines[Math.floor(Math.random() * explicitLines.length)];
+                    body.classList.add('mood-spicy');
+                } else {
+                    compliment = sweetLines[Math.floor(Math.random() * sweetLines.length)];
+                    body.classList.remove('mood-spicy');
+                }
+                
+                text.innerText = compliment;
+                text.classList.add('show');
+
+                const rect = btn.getBoundingClientRect();
+                for (let i = 0; i < 15; i++) {
+                    createParticle(rect.left + rect.width/2, rect.top + rect.height/2, isSpicy);
+                }
+            }, 300);
+        });
+    </script>
+</body>
+</html>
